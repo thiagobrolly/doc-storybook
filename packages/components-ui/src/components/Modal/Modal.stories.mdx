@@ -1,0 +1,92 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { useArgs } from '@storybook/client-api';
+import { Button } from '../..';
+import { Modal } from '.';
+
+<Meta
+  title="Popover/Modal"
+  component={Modal}
+  args={{
+    isOpen: false,
+    shouldCloseOnOverlayClick: true,
+    shouldCloseOnEscClick: true,
+    viewCloseButton: false,
+    scrollBarDisabled: true,
+    title: '',
+    children: 'Lorem ipsum',
+    widthModal: '',
+  }}
+  argTypes={{}}
+  parameters={{
+    backgrounds: {
+      default: 'paylivre',
+    },
+  }}
+/>
+
+export const TemplateBasic = ({ ...args }) => {
+  const [, updateArgs] = useArgs();
+  return (
+    <div>
+      <Button variant="secondary" onClick={(isOpen) => updateArgs({ isOpen })}>
+        Abrir Modal
+      </Button>
+      <Modal {...args} onRequestClose={(isOpen) => updateArgs({ isOpen })} />
+    </div>
+  );
+};
+
+# Modal
+
+O componente `Modal` é um tipo de janela que aparece na frente do conteúdo do aplicativo para fornecer informações críticas ou solicitar uma decisão. As caixas de diálogo desativam toda a funcionalidade do aplicativo quando elas são exibidas e permanecem na tela até que sejam confirmadas, rejeitadas ou que uma ação necessária tenha sido executada.
+
+## Import
+
+```sh
+  import { Modal } from '@paylivre/components';
+```
+
+## Basic
+
+<Canvas>
+  <Story name="Default">{TemplateBasic.bind({})}</Story>
+</Canvas>
+
+## Customized
+
+O `Modal` pode ser customizado através das props:
+
+`shouldCloseOnOverlayClick` para ativar ou desativar a opção de fechar ao clicar fora do modal.
+
+`shouldCloseOnEscClick` para ativar ou desativar a opção de fechar ao pressionar a tecla Esc.
+
+`scrollBarDisabled` para ativar ou desativar o scroll do conteúdo por trás do modal.
+
+`viewCloseButton` exibir botão para fechar modal.
+
+`title` para adicionar um título ao conteúdo o modal.
+
+`widthModal` para informar um tamanho para o modal.
+
+<Canvas>
+  <Story
+    name="Customized"
+    args={{
+      isOpen: false,
+      shouldCloseOnOverlayClick: true,
+      shouldCloseOnEscClick: true,
+      viewCloseButton: true,
+      scrollBarDisabled: true,
+      title: 'Modal Title',
+      children:
+        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit ducimus quam facere veritatis eum unde doloremque laudantium odit, accusamus dignissimos quasi, accusantium earum voluptate magni dolores sit beatae cumque nulla.',
+      widthModal: '450px',
+    }}
+  >
+    {TemplateBasic.bind({})}
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={Modal} />

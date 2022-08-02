@@ -1,0 +1,107 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Flex } from '../Flex';
+
+import { Heading } from '.';
+
+<Meta
+  title="Components/Heading"
+  component={Heading}
+  args={{
+    children: 'Heading',
+    uppercase: false,
+    bold: false,
+    color: 'gray',
+    as: 'h1',
+    size: 'medium',
+    margin: '',
+    marginTop: '',
+    marginBottom: '',
+    marginLeft: '',
+    marginRight: '',
+  }}
+  argTypes={{}}
+  parameters={{
+    docs: {
+      source: {
+        language: 'jsx',
+        type: 'auto',
+        state: 'open',
+      },
+    },
+  }}
+/>
+
+export const Template = ({ ...args }) => <Heading {...args} />;
+
+# Heading
+
+O componente `Heading` é usado para renderizar elementos de cabeçalho HTML semânticos.
+
+## Import
+
+```sh
+  import { Heading } from '@paylivre/components';
+```
+
+## Basic
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      children: 'Heading',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Variations Theme
+
+O `Heading` renderiza uma tag `<h1>` por padrão, mas pode receber qualquer outra tag de cabeçallho através da props `as`.
+
+<Canvas>
+  <Story name="h2">
+    <Heading as="h2">Olá, sou um h2</Heading>
+  </Story>
+</Canvas>
+
+O `Heading` recebe variações de tamanhos passados na props `size`.
+
+<Canvas>
+  <Story name="sizes">
+    <Heading size="small">Olá, Paylivre</Heading>
+    <Heading size="medium">Olá, Paylivre</Heading>
+    <Heading size="large">Olá, Paylivre</Heading>
+    <Heading size="xlarge">Olá, Paylivre</Heading>
+    <Heading size="xxlarge">Olá, Paylivre</Heading>
+    <Heading size="big">Olá, Paylivre</Heading>
+    <Heading size="xbig">Olá, Paylivre</Heading>
+    <Heading size="huge">Olá, Paylivre</Heading>
+  </Story>
+</Canvas>
+
+O `Heading` recebe variações de cores pela props `color`.
+
+<Canvas>
+  <Story name="colors">
+    <Flex bg="gray">
+      <Heading bold uppercase color="white">
+        Olá, Paylivre
+      </Heading>
+    </Flex>
+    <Heading bold uppercase color="gray">
+      Olá, Paylivre
+    </Heading>
+    <Heading bold uppercase color="black">
+      Olá, Paylivre
+    </Heading>
+    <Heading bold uppercase color="secondary">
+      Olá, Paylivre
+    </Heading>
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={Heading} />

@@ -1,0 +1,152 @@
+{
+  "name": "@paylivre/root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "homepage": "https://thiagobrolly.github.io/doc-storybook/",
+  "repository": "https://github.com/thiagobrolly/doc-storybook",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "lerna run build --stream",
+    "dev": "lerna exec --scope @paylivre/app  -- yarn start",
+    "commit": "yarn cz",
+    "lint": "eslint packages/**/src --ext .ts,.tsx,.js,.jsx,.mdx --max-warnings=0",
+    "prettier:check": "prettier --check packages/**/src",
+    "prettier:fix": "prettier --write packages/**/src",
+    "test": "jest",
+    "test:watch": "yarn test --watchAll",
+    "generate": "yarn plop --plopfile ./generators/plopfile.js",
+    "svgr": "npx @svgr/cli packages/icons/src/assets --out-dir packages/icons/src/components --no-dimensions --ignore-existing --typescript",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "predeploy": "yarn build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static",
+    "prepublishOnly": "yarn build"
+  },
+  "lint-staged": {
+    "packages/**/src/**/*": [
+      "yarn lint --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "✨ feat": {
+          "title": "New feature",
+          "description": "novas funcionalidades"
+        },
+        "🚀 perf": {
+          "title": "Performance improvement",
+          "description": "aumenta performance"
+        },
+        "🩹 fix": {
+          "title": "Bug fix",
+          "description": "resolve um problema"
+        },
+        "♻️  refactor": {
+          "title": "Refectory",
+          "description": "melhora ou mudanças de estrutura do código"
+        },
+        "📝 docs": {
+          "title": "Documentation",
+          "description": "adiciona documentação"
+        },
+        "🧪 test": {
+          "title": "Test",
+          "description": "trabalha tests"
+        },
+        "🎨 style": {
+          "title": "Style",
+          "description": "trabalha estilo"
+        },
+        "🔧 chore": {
+          "title": "New Version",
+          "description": "Release de nova versão"
+        },
+        "🏗️  build": {
+          "title": "New Version",
+          "description": "marcar mudanças de build"
+        },
+        "💥 ci": {
+          "title": "Continuos Integration",
+          "description": "integração Contínua"
+        },
+        "➕ env": {
+          "title": "Environment",
+          "description": "modificar ou adicionar funcionalidade ao ambiente"
+        },
+        "🚧 wip": {
+          "title": "Work in progress",
+          "description": "salva trabalho ainda em progresso"
+        },
+        "📦️ pack": {
+          "title": "Pack",
+          "description": "instala pacotes e/ou dependências ao projeto"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@storybook/addon-actions": "^6.5.6",
+    "@storybook/addon-essentials": "^6.5.6",
+    "@storybook/addon-interactions": "^6.5.6",
+    "@storybook/addon-links": "^6.5.6",
+    "@storybook/react": "^6.5.6",
+    "@storybook/testing-library": "^0.0.11",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@types/jest": "^27.5.1",
+    "@types/react": "^18.0.9",
+    "@types/styled-components": "^5.1.25",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "babel-jest": "^28.1.0",
+    "babel-loader": "^8.2.5",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-mdx": "^1.17.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-storybook": "^0.5.12",
+    "gh-pages": "^4.0.0",
+    "husky": "^8.0.1",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jest-styled-components": "^7.0.8",
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.4.1",
+    "plop": "^3.1.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.7",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "storybook-dark-mode": "^1.1.0",
+    "styled-components": "^5.3.5",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,56 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+
+import { theme } from '@paylivre/styles';
+
+<Meta title="Docs/Typography" />
+
+# Typography
+
+#### Font Family: Open Sans
+
+<Typeset
+  fontSizes={[
+    '1rem',
+    '1.2rem',
+    '1.4rem',
+    '1.6rem',
+    '2rem',
+    '2.4rem',
+    '3.4rem',
+    '4.8rem',
+    '6rem',
+    '9.6rem',
+  ]}
+  fontFamily={theme.font.family.primary}
+  sampleText="With big powers come big responsabilities"
+/>
+
+#### Font Weights
+
+<div
+  style={{
+    boxShadow: `${theme.shadow.base}`,
+    border: '1px solid rgba(0,0,0,.1)',
+    padding: '1rem 2rem',
+    margin: '2.5rem 0 4rem',
+  }}
+>
+  <p style={{ fontWeight: `${theme.font.weight.light}` }}>
+    <span>300</span> - With big powers come big responsabilities
+  </p>
+  <p style={{ fontWeight: `${theme.font.weight.regular}` }}>
+    <span>400</span> - With big powers come big responsabilities
+  </p>
+  <p style={{ fontWeight: `${theme.font.weight.medium}` }}>
+    <span>500</span> - With big powers come big responsabilities
+  </p>
+  <p style={{ fontWeight: `${theme.font.weight.semiBold}` }}>
+    <span>600</span> - With big powers come big responsabilities
+  </p>
+  <p style={{ fontWeight: `${theme.font.weight.bold}` }}>
+    <span>700</span> - With big powers come big responsabilities
+  </p>
+  <p style={{ fontWeight: `${theme.font.weight.extraBold}` }}>
+    <span>800</span> - With big powers come big responsabilities
+  </p>
+</div>

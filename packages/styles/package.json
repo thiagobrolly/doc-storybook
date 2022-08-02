@@ -1,0 +1,21 @@
+{
+  "name": "@paylivre/styles",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "Thiago Sousa <thiago.sousa@paylivre.com>",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rollup -c"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "styled-components": "^5.0.0"
+  }
+}

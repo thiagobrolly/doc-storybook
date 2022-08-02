@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paylivre-storybook
+  labels:
+    app: paylivre-storybook
+spec:
+  selector:
+    matchLabels:
+      app: paylivre-storybook
+  replicas: 1
+  revisionHistoryLimit: 1
+  progressDeadlineSeconds: 7200
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: paylivre-storybook
+    spec:
+      containers:
+        - name: paylivre-storybook
+          image: gcr.io/GCP_PROJECT_ID/GCP_REGISTRY_REPO:IMAGE_TAG 
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            periodSeconds: 15
+            failureThreshold: 3
+            timeoutSeconds: 5
+            initialDelaySeconds: 600
+            tcpSocket:
+              port: 80
+          readinessProbe:
+            failureThreshold: 9
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            tcpSocket:
+              port: 80
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 1Gi
+            requests:
+              cpu: 0.3
+              memory: 500m

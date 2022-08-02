@@ -1,0 +1,33 @@
+{
+  "name": "@paylivre/components",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "Thiago Sousa <thiago.sousa@paylivre.com>",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rollup -c"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "styled-components": "^5.0.0"
+  },
+  "dependencies": {
+    "@paylivre/icons": "^0.0.0",
+    "@paylivre/styles": "^0.0.0",
+    "@radix-ui/react-accordion": "^0.1.6",
+    "@radix-ui/react-popover": "^0.1.6",
+    "@radix-ui/react-tooltip": "^0.1.7",
+    "react-focus-lock": "^2.9.0",
+    "react-transition-group": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/react-transition-group": "^4.4.4"
+  }
+}

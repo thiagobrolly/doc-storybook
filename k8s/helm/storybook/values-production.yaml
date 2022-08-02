@@ -1,0 +1,14 @@
+limit:
+  cpu: 2.0
+  memory: 2Gi  
+affinity:
+  enabled: true
+  nodepool: app-pool-new
+antiaffinity:
+  enabled: true
+  weight: 50
+hpa:
+  enabled: true
+  minReplicas: 4
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 70

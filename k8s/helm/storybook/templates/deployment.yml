@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.name" . }}
+  labels:
+    {{- include "app.selectorLabels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "app.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  revisionHistoryLimit: 1
+  progressDeadlineSeconds: 7200
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "app.selectorLabels" . | nindent 8 }}
+    spec:
+
+      {{- if or .Values.affinity.enabled .Values.antiaffinity.enabled }}
+      affinity:  
+      {{- end }}
+
+      {{- if .Values.affinity.enabled }}
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cloud.google.com/gke-nodepool
+                operator: In
+                values:
+                - {{ .Values.affinity.nodepool }}
+      {{- end }}    
+
+      {{- if .Values.antiaffinity.enabled }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ include "app.name" . }}
+              topologyKey: kubernetes.io/hostname
+            weight: {{ .Values.antiaffinity.weight }}
+      {{- end }}
+
+      containers:
+        - name: paylivre-storybook
+          image: gcr.io/paylivre-304215/paylivre-storybook:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            periodSeconds: 5
+            failureThreshold: 3
+            timeoutSeconds: 5
+            initialDelaySeconds: 600
+            tcpSocket:
+              port: 80
+          readinessProbe:
+            failureThreshold: 9
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            tcpSocket:
+              port: 80
+          resources:
+            limits:
+              cpu: {{ .Values.limit.cpu }}
+              memory: {{ .Values.limit.memory }}
+            requests:
+              cpu: 0.3
+              memory: 500m
+
+                
